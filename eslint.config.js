@@ -3,6 +3,13 @@ import prettierPlugin from "eslint-plugin-prettier";
 import tsPlugin from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
 import angularPlugin from "@angular-eslint/eslint-plugin";
+import angularTemplatePlugin from "@angular-eslint/eslint-plugin-template";
+import angularTemplateParser from "@angular-eslint/template-parser";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export default [
 	{
@@ -10,8 +17,8 @@ export default [
 		languageOptions: {
 			parser: tsParser,
 			parserOptions: {
-				project: "./tsconfig.json",
-				sourceType: "module",
+				project: "./tsconfig.eslint.json",
+				tsconfigRootDir: __dirname,
 			},
 		},
 		plugins: {
@@ -26,11 +33,11 @@ export default [
 	{
 		files: ["**/*.html"],
 		plugins: {
-			"@angular-eslint/template": angularPlugin.template,
+			"@angular-eslint/template": angularTemplatePlugin,
 		},
 		languageOptions: {
-			parser: angularPlugin.templateParser,
+			parser: angularTemplateParser,
 		},
-		rules: angularPlugin.configs["recommended"].rules,
+		rules: { ...angularTemplatePlugin.configs.recommended.rules },
 	},
 ];

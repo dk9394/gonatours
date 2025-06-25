@@ -1,0 +1,8 @@
+{
+	"typescript.tsserver.watchOptions": "vscode",
+	"editor.quickSuggestions": {
+		"strings": true
+	},
+	"tailwindCSS.emmetCompletions": true,
+	"css.validate": false
+}

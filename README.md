@@ -13,7 +13,7 @@ npm install daisyui@latest tailwindcss@latest @tailwindcss/postcss@latest postcs
 ```
 
 - Create tailwind.config.js file to configure tailwindCSS
-- Create .postcssrc.json file
+- Create postcss.config.js file
 - Follow daisyUI configure steps
 
 ### Install prettier and ESLint
@@ -84,6 +84,14 @@ npm install --save-dev jest jest-preset-angular @types/jest @angular-builders/je
 "builder": "@angular-builders/jest:run"
 ```
 
+- Add following scripts to package.json file
+
+```bash
+"test": "jest",
+"test:watch": "jest --watch",
+"test:coverage": "jest --coverage",
+```
+
 - clean node_modules and package-lock.json files using following commands and run `npm install` again
 
 ```bash
@@ -131,6 +139,8 @@ npx husky add .husky/pre-commit "npx lint-staged"
     ]
 }
 ```
+
+- You can add pre-push Git-Hook to avoid push to master/main accidently
 
 ## Add proxy to avoid cors errors
 

@@ -4,12 +4,15 @@
 	"scripts": {
 		"ng": "ng",
 		"start": "ng serve",
-		"build": "ng build",
 		"dev": "ng serve --proxy-config proxy.conf.json",
+		"build": "ng build",
 		"watch": "ng build --watch --configuration development",
 		"prepare": "husky install",
-		"test": "ng test",
+		"test": "jest",
+		"test:watch": "jest --watch",
+		"test:coverage": "jest --coverage",
 		"format": "npx prettier . --write",
+		"lint": "ng lint",
 		"lint:fix": "npx eslint . --fix"
 	},
 	"prettier": {
@@ -40,6 +43,7 @@
 		"@angular/platform-browser": "^20.0.0",
 		"@angular/router": "^20.0.0",
 		"@tailwindcss/postcss": "^4.1.10",
+		"bootstrap": "^5.3.7",
 		"daisyui": "^5.0.43",
 		"postcss": "^8.5.6",
 		"rxjs": "~7.8.0",
@@ -66,5 +70,6 @@
 		"prettier": "^3.6.1",
 		"prettier-eslint": "^16.4.2",
 		"typescript": "~5.8.2"
-	}
+	},
+	"type": "module"
 }
