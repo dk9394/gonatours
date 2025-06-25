@@ -2,58 +2,153 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.4.
 
-## Development server
+## Project Setup
 
-To start a local development server, run:
+### Install daisyUI and tailwindCSS
 
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Run following command to install dependencies
 
 ```bash
-ng generate component component-name
+npm install daisyui@latest tailwindcss@latest @tailwindcss/postcss@latest postcss@latest
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- Create tailwind.config.js file to configure tailwindCSS
+- Create .postcssrc.json file
+- Follow daisyUI configure steps
+
+### Install prettier and ESLint
+
+#### Prettier setup
+
+- Install Prettier - Code formatter VS Code extension
+- Run following command to install dev-dependencies
 
 ```bash
-ng generate --help
+npm install --save-dev eslint prettier eslint-config-prettier eslint-plugin-prettier @typescript-eslint/parser @typescript-eslint/eslint-plugin angular-eslint prettier-eslint
 ```
 
-## Building
-
-To build the project run:
+- Create .prettierrc file and add formatting rules
 
 ```bash
-ng build
+{
+  "semi": true,
+  "singleQuote": true,
+  "useTabs": true,
+  "tabWidth": 4,
+  "trailingComma": "es5",
+  "printWidth": 80
+}
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- Add script to package.json to run format command
 
 ```bash
-ng test
+"format": "npx prettier . --write"
 ```
 
-## Running end-to-end tests
+#### ESLint setup
 
-For end-to-end (e2e) testing, run:
+- Install ESLint VS code extension
+- Create eslint.config.js and configure the file
+- Add following script in package.json file to fix eslint issues
 
 ```bash
-ng e2e
+"lint:fix": "npx eslint . --fix"
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### Install Jest and remove Jasmine & Karma
 
-## Additional Resources
+#### Remove Jasmine & Karma
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Run following command to remove Jasmine & Karma
+
+```bash
+npm uninstall --save-dev karma karma-chrome-launcher karma-coverage karma-jasmine karma-jasmine-html-reporter jasmine-core @types/jasmine
+```
+
+#### Install Jest
+
+- Install Jest Runner VS Code extension to run tests directly from the spec files
+- Run following command to install Jest
+
+```bash
+npm install --save-dev jest jest-preset-angular @types/jest @angular-builders/jest
+```
+
+- Create jest.config.js file to configure Jest
+- Create setup-jest.ts file and update the "include" property in tsconfig.json file
+- Replace jasmine with jest in tsconfig.spec.json file, under "types" array
+- Update "test" -> "builder" property in angular.json file as follows
+
+```bash
+"builder": "@angular-builders/jest:run"
+```
+
+- clean node_modules and package-lock.json files using following commands and run `npm install` again
+
+```bash
+rm package-lock.json
+rm -rf node_modules
+npm install
+```
+
+### Install husky and lint-staged
+
+- Run following command to install husky and lint-staged
+
+```bash
+npm install --save-dev husky lint-staged
+```
+
+- Initialize husky using following command
+
+```bash
+npx husky install
+```
+
+- Add following script to package.json file
+
+```bash
+"prepare": "husky install"
+```
+
+- Add pre-commit Git-hook by running following command
+
+```bash
+npx husky add .husky/pre-commit "npx lint-staged"
+```
+
+- Configure lint-staged in package.json file as follows
+
+```bash
+"lint-staged": {
+  "*.{ts,js,json,html,css,scss}": [
+    "eslint --fix",
+    "prettier --write"
+  ],
+   "*.spec.ts": [
+      "jest --bail --findRelatedTests"
+    ]
+}
+```
+
+## Add proxy to avoid cors errors
+
+- Create proxy.conf.json file and configure as follows
+
+```bash
+{
+	"/api": {
+		"target": "http://localhost:3000",
+		"secure": false,
+		"changeOrigin": true,
+		"logLevel": "debug"
+	}
+}
+```
+
+- Add new dev script in package.json file as follows
+
+```bash
+"dev": "ng serve --proxy-config proxy.conf.json"
+```
