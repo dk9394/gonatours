@@ -1,4 +1,6 @@
 {
+	"editor.detectIndentation": true,
+	"editor.useEditorConfig": true,
 	"typescript.tsserver.watchOptions": "vscode",
 	"editor.quickSuggestions": {
 		"strings": true
