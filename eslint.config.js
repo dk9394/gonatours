@@ -1,43 +1,43 @@
-// eslint.config.js
-import prettierPlugin from "eslint-plugin-prettier";
-import tsPlugin from "@typescript-eslint/eslint-plugin";
-import tsParser from "@typescript-eslint/parser";
-import angularPlugin from "@angular-eslint/eslint-plugin";
-import angularTemplatePlugin from "@angular-eslint/eslint-plugin-template";
-import angularTemplateParser from "@angular-eslint/template-parser";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
+// @ts-check
+import eslint from "@eslint/js";
+import tseslint from "typescript-eslint";
+import angular from "angular-eslint";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-export default [
+export default tseslint.config(
 	{
 		files: ["**/*.ts"],
-		languageOptions: {
-			parser: tsParser,
-			parserOptions: {
-				project: "./tsconfig.eslint.json",
-				tsconfigRootDir: __dirname,
-			},
-		},
-		plugins: {
-			"@typescript-eslint": tsPlugin,
-			prettier: prettierPlugin,
-		},
+		extends: [
+			eslint.configs.recommended,
+			...tseslint.configs.recommended,
+			...tseslint.configs.stylistic,
+			...angular.configs.tsRecommended,
+		],
+		processor: angular.processInlineTemplates,
 		rules: {
-			...tsPlugin.configs.recommended.rules,
-			"prettier/prettier": "error",
+			"@angular-eslint/directive-selector": [
+				"error",
+				{
+					type: "attribute",
+					prefix: "app",
+					style: "camelCase",
+				},
+			],
+			"@angular-eslint/component-selector": [
+				"error",
+				{
+					type: "element",
+					prefix: "app",
+					style: "kebab-case",
+				},
+			],
 		},
 	},
 	{
 		files: ["**/*.html"],
-		plugins: {
-			"@angular-eslint/template": angularTemplatePlugin,
-		},
-		languageOptions: {
-			parser: angularTemplateParser,
-		},
-		rules: { ...angularTemplatePlugin.configs.recommended.rules },
+		extends: [
+			...angular.configs.templateRecommended,
+			...angular.configs.templateAccessibility,
+		],
+		rules: {},
 	},
-];
+);
