@@ -60,9 +60,7 @@
 		"@angular/cli": "^20.0.4",
 		"@angular/compiler-cli": "^20.0.0",
 		"@types/jest": "^30.0.0",
-		"@typescript-eslint/eslint-plugin": "^8.35.0",
-		"@typescript-eslint/parser": "^8.35.0",
-		"angular-eslint": "^20.1.1",
+		"angular-eslint": "20.1.1",
 		"eslint": "^9.29.0",
 		"eslint-config-prettier": "^10.1.5",
 		"eslint-plugin-prettier": "^5.5.1",
@@ -72,7 +70,8 @@
 		"lint-staged": "^16.1.2",
 		"prettier": "^3.6.1",
 		"prettier-eslint": "^16.4.2",
-		"typescript": "~5.8.2"
+		"typescript": "~5.8.2",
+		"typescript-eslint": "8.34.1"
 	},
 	"type": "module"
 }
