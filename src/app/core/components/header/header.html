@@ -1,0 +1,131 @@
+<div class="drawer">
+	<input
+		id="my-drawer-3"
+		type="checkbox"
+		class="drawer-toggle"
+		(change)="onSidebarOpen($event)"
+	/>
+	<div class="drawer-content flex flex-col">
+		<div class="navbar py-4 lg:py-6">
+			<div class="navbar-start">
+				<a class="logo text-3xl mx-2 px-2">
+					<span class="text-primary">go</span>
+					<span>natours</span>
+				</a>
+			</div>
+			<div class="navbar-center hidden lg:flex">
+				<ul class="menu menu-horizontal px-1">
+					@for (item of navItems; track $index) {
+						<li>
+							@if (item.submenu) {
+								<details>
+									<summary>Parent</summary>
+									<ul
+										class="submenu-lg px-4 py-2 bg-base-300 mt-0"
+									>
+										@for (
+											submenuItem of item.submenu;
+											track $index
+										) {
+											<li>
+												<a class="py-2">{{
+													submenuItem.name
+												}}</a>
+											</li>
+										}
+									</ul>
+								</details>
+							} @else {
+								<a>{{ item.name }}</a>
+							}
+						</li>
+					}
+				</ul>
+			</div>
+			<div class="navbar-end hidden lg:flex align-center">
+				<a class="btn btn-primary">Login</a>
+				<a class="btn btn-ghost ml-2">Signup</a>
+			</div>
+			<div
+				class="navbar-end flex align-center flex-none lg:hidden"
+				[class.opacity-0]="isSidebarOpen"
+			>
+				<label
+					for="my-drawer-3"
+					aria-label="open sidebar"
+					class="btn btn-square btn-ghost"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						class="inline-block h-6 w-6 stroke-current"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M4 6h16M4 12h16M4 18h16"
+						></path>
+					</svg>
+				</label>
+			</div>
+		</div>
+	</div>
+	<div class="drawer-side">
+		<label
+			for="my-drawer-3"
+			aria-label="close sidebar"
+			class="drawer-overlay bg-base-300"
+		></label>
+		<div
+			class="menu bg-base-100 min-h-full w-80 p-4 flex flex-col align-start"
+		>
+			<div class="flex align-center">
+				<a class="logo text-3xl flex-1">
+					<span class="text-primary">go</span>
+					<span>natours</span>
+				</a>
+				<!-- <button
+					class="cross btn btn-circle btn-ghost text-5xl"
+					type="button"
+					(click)="
+						drawerInputCheckbox.checked = false;
+						isSidebarOpen = false
+					"
+				>
+					x
+				</button> -->
+			</div>
+			<ul class="drawer-menu flex-1 mt-6">
+				@for (item of navItems; track $index) {
+					<li>
+						@if (item.submenu) {
+							<details>
+								<summary class="py-3">Parent</summary>
+								<ul class="p-2 bg-base-300">
+									@for (
+										submenuItem of item.submenu;
+										track $index
+									) {
+										<li>
+											<a class="py-3">{{
+												submenuItem.name
+											}}</a>
+										</li>
+									}
+								</ul>
+							</details>
+						} @else {
+							<a class="py-3">{{ item.name }}</a>
+						}
+					</li>
+				}
+			</ul>
+			<div class="flex align-center gap-2">
+				<a class="btn btn-primary flex-1">Login</a>
+				<a class="btn btn-soft flex-1">Signup</a>
+			</div>
+		</div>
+	</div>
+</div>
