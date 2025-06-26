@@ -1,5 +1,6 @@
 module.exports = {
 	preset: "jest-preset-angular",
+	testEnvironment: "jsdom",
 	setupFilesAfterEnv: ["<rootDir>/setup-jest.ts"],
 	testMatch: ["**/+(*.)+(spec).+(ts)"],
 	collectCoverage: true,
@@ -9,6 +10,8 @@ module.exports = {
 		"src/**/*.ts",
 		"!src/**/*.module.ts", // ⬅ Exclude Angular modules
 		"!src/main.ts",
+		"!src/**/*.config.ts",
+		"!src/**/*.routes.ts",
 	],
 	coverageThreshold: {
 		global: {

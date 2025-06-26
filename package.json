@@ -30,6 +30,9 @@
 			"eslint --fix",
 			"prettier --write"
 		],
+		"*.{ts,js}": [
+			"jest --coverage --coverageReporters=text-summary"
+		],
 		"*.spec.ts": [
 			"jest --bail --findRelatedTests"
 		]
