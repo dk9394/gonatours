@@ -2,9 +2,9 @@ name: Gonatours - Non Prod
 
 on:
     push:
-        branches-ignore: ["main", "dev"]
+        branches-ignore: ["main"]
     pull_request:
-        branches: ["dev"]
+        branches: ["main"]
 
 jobs:
     build:
