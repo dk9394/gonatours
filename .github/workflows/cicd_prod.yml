@@ -1,4 +1,4 @@
-name: Gonatours - Non Prod
+name: Gonatours - Prod
 
 on:
     push:
